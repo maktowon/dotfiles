@@ -90,6 +90,7 @@ alias cat="bat"
 alias ls="eza"
 
 alias pavucontrol='GDK_BACKEND=x11 pavucontrol' # pavucontrol didn't open properly on wayland
+alias discord='env -u WAYLAND_DISPLAY flatpak run com.discordapp.Discord'
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
@@ -104,3 +105,4 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
