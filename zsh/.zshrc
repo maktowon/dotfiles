@@ -88,6 +88,7 @@ source $ZSH/oh-my-zsh.sh
 alias v="nvim"
 alias cat="bat"
 alias ls="eza"
+alias tmux="TERM=xterm-256color tmux"
 
 alias pavucontrol='GDK_BACKEND=x11 pavucontrol' # pavucontrol didn't open properly on wayland
 alias discord='env -u WAYLAND_DISPLAY flatpak run com.discordapp.Discord'
