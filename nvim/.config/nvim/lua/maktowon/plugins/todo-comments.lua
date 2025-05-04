@@ -8,11 +8,11 @@ return {
     -- set keymaps
     local keymap = vim.keymap -- for conciseness
 
-    keymap.set("n", "<leader>tn", function()
+    keymap.set("n", "<leader>tdn", function()
       todo_comments.jump_next()
     end, { desc = "Next todo comment" })
 
-    keymap.set("n", "<leader>tp", function()
+    keymap.set("n", "<leader>tdp", function()
       todo_comments.jump_prev()
     end, { desc = "Previous todo comment" })
 

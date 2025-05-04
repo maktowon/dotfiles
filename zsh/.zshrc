@@ -85,6 +85,25 @@ source $ZSH/oh-my-zsh.sh
 # USER CONFIGURATION BEGIN
 #######################################################################################################################
 
+alias g="git"
+alias gs="git status --short"
+alias ga="git add"
+alias gap="git add --patch"
+alias gb='git branch'
+alias gba='gb --all'
+alias gn='git checkout -b'
+alias gd="git diff --output-indicator-new=' ' --output-indicator-old=' '"
+alias gc="git commit"
+alias gca='gc --amend --no-edit'
+alias gce='gc --amend'
+alias gco='git checkout'
+alias gp="git push"
+alias gu="git pull"
+alias gl='git log --graph --all --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(blue)  %D%n%s%n"'
+alias gb="git branch"
+alias gi="git init"
+alias gcl="git clone"
+
 alias v="nvim"
 alias cat="bat"
 alias ls="eza"
