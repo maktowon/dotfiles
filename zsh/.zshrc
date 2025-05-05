@@ -110,7 +110,7 @@ alias ls="eza"
 alias tmux="TERM=xterm-256color tmux"
 
 alias pavucontrol='GDK_BACKEND=x11 pavucontrol' # pavucontrol didn't open properly on wayland
-alias discord='env -u WAYLAND_DISPLAY flatpak run com.discordapp.Discord'
+alias discord='flatpak run dev.vencord.Vesktop'
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
