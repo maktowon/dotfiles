@@ -48,10 +48,8 @@ sudo stow ~/dotfiles/xremap --stow
 stow --target /usr/share/themes ~/dotfiles/themes
 
 # setup git + git so fancy
-bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
-zinit ice lucid as"program" pick"bin/git-dsf"
-zinit load so-fancy/diff-so-fancy
 stow ~/dotfiles/git --stow
+sudo dnf install git-so-fancy
 
 ### setup hyprland #############################################################
 
@@ -62,6 +60,12 @@ sudo dnf install hyprland -y
 sudo dnf install --releasever=41 hyprpaper -y
 sudo dnf install --releasever=41 hypridle -y
 sudo dnf install --releasever=41 hyprlock -y
+
+# install notifications
+sudo dnf install swaync -y
+
+# install screenshot
+sudo dnf install grimshot -y
 
 # install thunar and pavucontrol
 sudo dnf install thunar -y
