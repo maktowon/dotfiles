@@ -26,6 +26,12 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-
 
 stow ~/dotfiles/zsh --stow
 
+# install JetBrains Mono Nerd Font
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts
+curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip && unzip JetBrainsMono.zip && rm JetBrainsMono.zip
+cd
+
 # install tmux
 sudo dnf install tmux -y
 stow tmux --stow
