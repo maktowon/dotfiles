@@ -37,7 +37,7 @@ return {
           "black",
           "autopep8",
           "pylint",
-          "eslint_d",
+          {"eslint_d", version="13.1.2"},
         },
       })
 		end,
@@ -50,6 +50,7 @@ return {
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+      vim.lsp.set_log_level("debug")
 
 			local lspconfig = require("lspconfig")
 
