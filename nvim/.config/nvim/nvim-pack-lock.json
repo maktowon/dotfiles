@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "vim": {
+      "rev": "f13f5dfbb784deddbc1d8195f34dfd9ec73e2295",
+      "src": "https://github.com/nordtheme/vim"
+    }
+  }
+}
