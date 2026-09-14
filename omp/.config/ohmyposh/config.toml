@@ -1,0 +1,177 @@
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
+version = 4
+final_space = false
+
+# ============================================================
+# LEFT
+# ============================================================
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  # USER
+  [[blocks.segments]]
+    type = 'session'
+    style = 'plain'
+    foreground = '#ECEFF4'
+    background = '#5E81AC'
+    template = ' {{ .UserName }} '
+    font_weight = 'bold'
+
+  # PATH
+  [[blocks.segments]]
+    type = 'path'
+    style = 'plain'
+    foreground = '#2E3440'
+    background = '#81A1C1'
+    template = ' {{ .Path }} '
+
+    [blocks.segments.properties]
+      style = 'full'
+
+  # GIT
+  [[blocks.segments]]
+    type = 'git'
+    style = 'plain'
+    foreground = '#2E3440'
+    background = '#88C0D0'
+    template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if gt .Staging.Added 0 }} +{{ .Staging.Added }}{{ end }}{{ if gt .Staging.Modified 0 }} !{{ .Staging.Modified }}{{ end }}{{ if gt .Working.Untracked 0 }} ?{{ .Working.Untracked }}{{ end }}{{ if gt .Working.Unmerged 0 }} ~{{ .Working.Unmerged }}{{ end }} '
+
+    [blocks.segments.properties]
+      fetch_status = true
+
+  # arrow prompt
+  [[blocks.segments]]
+    type = 'text'
+    style = 'plain'
+    foreground = '#D8DEE9'
+    template = ' » '
+
+# ============================================================
+# RIGHT
+# ============================================================
+
+[[blocks]]
+  type = 'rprompt'
+  alignment = 'right'
+
+  # EXECUTION TIME
+  [[blocks.segments]]
+    type = 'executiontime'
+    style = 'plain'
+    foreground = '#D8DEE9'
+    template = ' {{ .FormattedMs }} '
+
+    [blocks.segments.properties]
+      threshold = 500
+
+  # CURRENT TIME
+  [[blocks.segments]]
+    type = 'time'
+    style = 'plain'
+    foreground = '#D8DEE9'
+    template = ' {{ .CurrentDate | date .Format }} '
+
+    [blocks.segments.properties]
+      time_format = '15:04:05'
+
+  # PYTHON
+  [[blocks.segments]]
+    type = 'python'
+    style = 'plain'
+    foreground = '#2E3440'
+    background = '#A3BE8C'
+    template = ' Python {{ .Full }}{{ if .Venv }} ({{ .Venv }}){{ end }} '
+
+    [blocks.segments.properties]
+      display_mode = 'context'
+      fetch_virtual_env = true
+      display_default = false
+
+  # NODE
+  [[blocks.segments]]
+    type = 'node'
+    style = 'plain'
+    foreground = '#2E3440'
+    background = '#B48EAD'
+    template = ' Node {{ .Full }} '
+
+    [blocks.segments.properties]
+      display_mode = 'context'
+
+  # GO
+  [[blocks.segments]]
+    type = 'go'
+    style = 'plain'
+    foreground = '#2E3440'
+    background = '#8FBCBB'
+    template = ' Go {{ .Full }} '
+
+    [blocks.segments.properties]
+      display_mode = 'context'
+
+  # RUST
+  [[blocks.segments]]
+    type = 'rust'
+    style = 'plain'
+    foreground = '#2E3440'
+    background = '#D08770'
+    template = ' Rust {{ .Full }} '
+
+    [blocks.segments.properties]
+      display_mode = 'context'
+
+  # JAVA
+  [[blocks.segments]]
+    type = 'java'
+    style = 'plain'
+    foreground = '#ECEFF4'
+    background = '#BF616A'
+    template = ' Java {{ .Full }} '
+
+    [blocks.segments.properties]
+      display_mode = 'context'
+
+  # RUBY
+  [[blocks.segments]]
+    type = 'ruby'
+    style = 'plain'
+    foreground = '#ECEFF4'
+    background = '#5E81AC'
+    template = ' Ruby {{ .Full }} '
+
+    [blocks.segments.properties]
+      display_mode = 'context'
+
+  # PHP
+  [[blocks.segments]]
+    type = 'php'
+    style = 'plain'
+    foreground = '#2E3440'
+    background = '#81A1C1'
+    template = ' PHP {{ .Full }} '
+
+    [blocks.segments.properties]
+      display_mode = 'context'
+
+  # DENO
+  [[blocks.segments]]
+    type = 'deno'
+    style = 'plain'
+    foreground = '#ECEFF4'
+    background = '#4C566A'
+    template = ' Deno {{ .Full }} '
+
+    [blocks.segments.properties]
+      display_mode = 'context'
+
+
+# ============================================================
+# TRANSIENT PROMPT
+# ============================================================
+
+[transient_prompt]
+  foreground = '#D8DEE9'
+  template = '» '
