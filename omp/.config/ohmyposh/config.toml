@@ -37,11 +37,9 @@ final_space = false
     style = 'plain'
     foreground = '#2E3440'
     background = '#88C0D0'
-    template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if gt .Staging.Added 0 }} +{{ .Staging.Added }}{{ end }}{{ if gt .Staging.Modified 0 }} !{{ .Staging.Modified }}{{ end }}{{ if gt .Working.Untracked 0 }} ?{{ .Working.Untracked }}{{ end }}{{ if gt .Working.Unmerged 0 }} ~{{ .Working.Unmerged }}{{ end }} '
-
+template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if gt (add .Staging.Added (add .Staging.Modified .Staging.Deleted)) 0 }} +{{ add .Staging.Added (add .Staging.Modified .Staging.Deleted) }}{{ end }}{{ if gt .Working.Modified 0 }} !{{ .Working.Modified }}{{ end }}{{ if gt .Working.Deleted 0 }} −{{ .Working.Deleted }}{{ end }}{{ if gt .Working.Untracked 0 }} ?{{ .Working.Untracked }}{{ end }}{{ if gt .Working.Unmerged 0 }} ~{{ .Working.Unmerged }}{{ end }} '
     [blocks.segments.properties]
       fetch_status = true
-
   # arrow prompt
   [[blocks.segments]]
     type = 'text'
