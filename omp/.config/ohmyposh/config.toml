@@ -1,6 +1,6 @@
 console_title_template = '{{ .Shell }} in {{ .Folder }}'
 version = 4
-final_space = false
+final_space = true
 
 # ============================================================
 # LEFT
@@ -10,15 +10,20 @@ final_space = false
   type = 'prompt'
   alignment = 'left'
   newline = true
+  leading_diamond = ' '
+  trailing_diamond = ''
 
   # USER
   [[blocks.segments]]
     type = 'session'
-    style = 'plain'
+    style = 'diamond'
     foreground = '#ECEFF4'
     background = '#5E81AC'
     template = ' {{ .UserName }} '
     font_weight = 'bold'
+
+    [blocks.segments.properties]
+      leading_diamond = ''
 
   # PATH
   [[blocks.segments]]
@@ -37,15 +42,25 @@ final_space = false
     style = 'plain'
     foreground = '#2E3440'
     background = '#88C0D0'
-template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if gt (add .Staging.Added (add .Staging.Modified .Staging.Deleted)) 0 }} +{{ add .Staging.Added (add .Staging.Modified .Staging.Deleted) }}{{ end }}{{ if gt .Working.Modified 0 }} !{{ .Working.Modified }}{{ end }}{{ if gt .Working.Deleted 0 }} −{{ .Working.Deleted }}{{ end }}{{ if gt .Working.Untracked 0 }} ?{{ .Working.Untracked }}{{ end }}{{ if gt .Working.Unmerged 0 }} ~{{ .Working.Unmerged }}{{ end }} '
+    template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if gt (add .Staging.Added (add .Staging.Modified .Staging.Deleted)) 0 }} +{{ add .Staging.Added (add .Staging.Modified .Staging.Deleted) }}{{ end }}{{ if gt .Working.Modified 0 }} !{{ .Working.Modified }}{{ end }}{{ if gt .Working.Deleted 0 }} −{{ .Working.Deleted }}{{ end }}{{ if gt .Working.Untracked 0 }} ?{{ .Working.Untracked }}{{ end }}{{ if gt .Working.Unmerged 0 }} ~{{ .Working.Unmerged }}{{ end }} '
+
     [blocks.segments.properties]
       fetch_status = true
-  # arrow prompt
+
+  # ARROW
   [[blocks.segments]]
     type = 'text'
-    style = 'plain'
-    foreground = '#D8DEE9'
-    template = ' » '
+    style = 'diamond'
+    foreground = '#2E3440'
+    background = '#88C0D0'
+    template = ' ❯'
+
+    background_templates = [
+      '{{ if .Segments.Contains "Git" }}#8FBCBB{{ else }}#88C0D0{{ end }}'
+    ]
+
+    [blocks.segments.properties]
+      trailing_diamond = ''
 
 # ============================================================
 # RIGHT
@@ -54,6 +69,20 @@ template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .B
 [[blocks]]
   type = 'rprompt'
   alignment = 'right'
+
+  # EXIT STATUS
+  [[blocks.segments]]
+    type = 'status'
+    style = 'plain'
+    foreground = '#A3BE8C'
+    template = '{{ if .Executed }}{{ if eq .Code 0 }}✓{{ else }}✗{{ end }}{{ end }}'
+
+    foreground_templates = [
+      '{{ if gt .Code 0 }}#BF616A{{ end }}'
+    ]
+
+    [blocks.segments.properties]
+      always_enabled = true
 
   # EXECUTION TIME
   [[blocks.segments]]
@@ -78,34 +107,40 @@ template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .B
   # PYTHON
   [[blocks.segments]]
     type = 'python'
-    style = 'plain'
+    style = 'diamond'
     foreground = '#2E3440'
     background = '#A3BE8C'
     template = ' Python {{ .Full }}{{ if .Venv }} ({{ .Venv }}){{ end }} '
+    leading_diamond = ''
+    trailing_diamond = ' '
 
     [blocks.segments.properties]
-      display_mode = 'context'
+      display_mode = 'content'
       fetch_virtual_env = true
       display_default = false
 
   # NODE
   [[blocks.segments]]
     type = 'node'
-    style = 'plain'
+    style = 'diamond'
     foreground = '#2E3440'
     background = '#B48EAD'
     template = ' Node {{ .Full }} '
+    leading_diamond = ''
+    trailing_diamond = ' '
 
     [blocks.segments.properties]
       display_mode = 'context'
-
+  
   # GO
   [[blocks.segments]]
     type = 'go'
-    style = 'plain'
+    style = 'diamond'
     foreground = '#2E3440'
     background = '#8FBCBB'
     template = ' Go {{ .Full }} '
+    leading_diamond = ''
+    trailing_diamond = ' '
 
     [blocks.segments.properties]
       display_mode = 'context'
@@ -113,10 +148,12 @@ template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .B
   # RUST
   [[blocks.segments]]
     type = 'rust'
-    style = 'plain'
+    style = 'diamond'
     foreground = '#2E3440'
     background = '#D08770'
     template = ' Rust {{ .Full }} '
+    leading_diamond = ''
+    trailing_diamond = ' '
 
     [blocks.segments.properties]
       display_mode = 'context'
@@ -124,10 +161,12 @@ template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .B
   # JAVA
   [[blocks.segments]]
     type = 'java'
-    style = 'plain'
+    style = 'diamond'
     foreground = '#ECEFF4'
     background = '#BF616A'
     template = ' Java {{ .Full }} '
+    leading_diamond = ''
+    trailing_diamond = ' '
 
     [blocks.segments.properties]
       display_mode = 'context'
@@ -135,10 +174,12 @@ template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .B
   # RUBY
   [[blocks.segments]]
     type = 'ruby'
-    style = 'plain'
+    style = 'diamond'
     foreground = '#ECEFF4'
     background = '#5E81AC'
     template = ' Ruby {{ .Full }} '
+    leading_diamond = ''
+    trailing_diamond = ' '
 
     [blocks.segments.properties]
       display_mode = 'context'
@@ -146,10 +187,12 @@ template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .B
   # PHP
   [[blocks.segments]]
     type = 'php'
-    style = 'plain'
+    style = 'diamond'
     foreground = '#2E3440'
     background = '#81A1C1'
     template = ' PHP {{ .Full }} '
+    leading_diamond = ''
+    trailing_diamond = ' '
 
     [blocks.segments.properties]
       display_mode = 'context'
@@ -157,10 +200,12 @@ template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .B
   # DENO
   [[blocks.segments]]
     type = 'deno'
-    style = 'plain'
+    style = 'diamond'
     foreground = '#ECEFF4'
     background = '#4C566A'
     template = ' Deno {{ .Full }} '
+    leading_diamond = ''
+    trailing_diamond = ' '
 
     [blocks.segments.properties]
       display_mode = 'context'
@@ -172,4 +217,4 @@ template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .B
 
 [transient_prompt]
   foreground = '#D8DEE9'
-  template = '» '
+  template = '❯ '
