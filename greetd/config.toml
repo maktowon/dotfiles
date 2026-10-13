@@ -1,0 +1,9 @@
+# Installed to /etc/greetd/config.toml by install.sh
+
+[terminal]
+vt = 1
+
+[default_session]
+# The greeter user's home is "/", so point caches at its runtime dir
+command = "sh -c 'export XDG_CACHE_HOME=$XDG_RUNTIME_DIR/cache XDG_STATE_HOME=$XDG_RUNTIME_DIR/state XDG_DATA_HOME=$XDG_RUNTIME_DIR/data; exec start-hyprland -- -c /etc/greetd/hyprland.lua'"
+user = "greeter"

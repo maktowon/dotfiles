@@ -51,6 +51,7 @@ local menu        = "hyprlauncher"
 --
 hl.on("hyprland.start", function () 
   hl.exec_cmd(terminal)
+  hl.exec_cmd("qs")
 end)
 
 
@@ -183,6 +184,13 @@ hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "
 --     rounding    = 0,
 -- })
 
+-- Quickshell bar and its popups open/close instantly
+hl.layer_rule({
+    name     = "quickshell-no-anim",
+    match    = { namespace = "quickshell" },
+    no_anim  = true,
+})
+
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
     dwindle = {
@@ -212,6 +220,7 @@ hl.config({
     misc = {
         force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
         disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
+        allow_session_lock_restore = true, -- lets a restarted quickshell re-take a lock if it crashed
     },
 })
 
@@ -249,6 +258,9 @@ hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 
 -- Quit hyprland
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+
+-- Lock screen (quickshell)
+hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd("qs ipc call lock lock"))
 
 -- Close window
 local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
