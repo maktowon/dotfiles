@@ -10,7 +10,7 @@ final_space = true
   type = 'prompt'
   alignment = 'left'
   newline = true
-  leading_diamond = ' '
+  leading_diamond = ''
   trailing_diamond = ''
 
   # USER
@@ -42,7 +42,7 @@ final_space = true
     style = 'plain'
     foreground = '#2E3440'
     background = '#88C0D0'
-    template = ' {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if gt (add .Staging.Added (add .Staging.Modified .Staging.Deleted)) 0 }} +{{ add .Staging.Added (add .Staging.Modified .Staging.Deleted) }}{{ end }}{{ if gt .Working.Modified 0 }} !{{ .Working.Modified }}{{ end }}{{ if gt .Working.Deleted 0 }} −{{ .Working.Deleted }}{{ end }}{{ if gt .Working.Untracked 0 }} ?{{ .Working.Untracked }}{{ end }}{{ if gt .Working.Unmerged 0 }} ~{{ .Working.Unmerged }}{{ end }} '
+    template = ' {{ .HEAD }}{{ if or (gt .Behind 0) (gt .Ahead 0) }} {{ end }}{{ if gt .Behind 0 }}⇣{{ .Behind }}{{ end }}{{ if gt .Ahead 0 }}⇡{{ .Ahead }}{{ end }}{{ if gt (add .Staging.Added (add .Staging.Modified .Staging.Deleted)) 0 }} +{{ add .Staging.Added (add .Staging.Modified .Staging.Deleted) }}{{ end }}{{ if gt .Working.Modified 0 }} !{{ .Working.Modified }}{{ end }}{{ if gt .Working.Deleted 0 }} −{{ .Working.Deleted }}{{ end }}{{ if gt .Working.Untracked 0 }} ?{{ .Working.Untracked }}{{ end }}{{ if gt .Working.Unmerged 0 }} ~{{ .Working.Unmerged }}{{ end }} '
 
     [blocks.segments.properties]
       fetch_status = true
@@ -99,7 +99,7 @@ final_space = true
     type = 'time'
     style = 'plain'
     foreground = '#D8DEE9'
-    template = ' {{ .CurrentDate | date .Format }} '
+    template = ' {{ .CurrentDate | date .Format }}'
 
     [blocks.segments.properties]
       time_format = '15:04:05'
@@ -218,3 +218,4 @@ final_space = true
 [transient_prompt]
   foreground = '#D8DEE9'
   template = '❯ '
+  right_template = '{{ now | date "15:04:05" }}'
