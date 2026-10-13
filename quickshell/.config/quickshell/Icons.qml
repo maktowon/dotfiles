@@ -28,4 +28,5 @@ Singleton {
     readonly property string hourglass: String.fromCodePoint(0xf051f)
     readonly property string eye: String.fromCodePoint(0xf0208)
     readonly property string eyeOff: String.fromCodePoint(0xf0209)
+    readonly property string search: String.fromCodePoint(0xf0349)
 }
