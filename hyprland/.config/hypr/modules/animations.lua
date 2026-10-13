@@ -1,0 +1,21 @@
+-- animations.lua
+
+hl.curve("almostLinear", { type = "bezier", points = { {0.5, 0.5}, {0.75, 1} } })
+
+hl.animation({ leaf = "global",        enabled = true, speed = 10, bezier = "almostLinear"                  })
+hl.animation({ leaf = "border",        enabled = true, speed = 5,  bezier = "almostLinear"                  })
+hl.animation({ leaf = "windows",       enabled = true, speed = 2,  bezier = "almostLinear"                  })
+hl.animation({ leaf = "windowsIn",     enabled = true, speed = 2,  bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "windowsOut",    enabled = true, speed = 2,  bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "fadeIn",        enabled = true, speed = 2,  bezier = "almostLinear"                  })
+hl.animation({ leaf = "fadeOut",       enabled = true, speed = 2,  bezier = "almostLinear"                  })
+hl.animation({ leaf = "fade",          enabled = true, speed = 2,  bezier = "almostLinear"                  })
+hl.animation({ leaf = "layers",        enabled = true, speed = 2,  bezier = "almostLinear"                  })
+hl.animation({ leaf = "layersIn",      enabled = true, speed = 2,  bezier = "almostLinear", style = "fade"  })
+hl.animation({ leaf = "layersOut",     enabled = true, speed = 2,  bezier = "almostLinear", style = "fade"  })
+hl.animation({ leaf = "fadeLayersIn",  enabled = true, speed = 2,  bezier = "almostLinear"                  })
+hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 2,  bezier = "almostLinear"                  })
+hl.animation({ leaf = "workspaces",    enabled = true, speed = 2,  bezier = "almostLinear", style = "fade"  })
+hl.animation({ leaf = "workspacesIn",  enabled = true, speed = 2,  bezier = "almostLinear", style = "fade"  })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 2,  bezier = "almostLinear", style = "fade"  })
+hl.animation({ leaf = "zoomFactor",    enabled = true, speed = 2,  bezier = "almostLinear"                  })
