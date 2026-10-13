@@ -56,7 +56,7 @@ final_space = true
     template = ' ❯'
 
     background_templates = [
-      '{{ if .Segments.Contains "Git" }}#8FBCBB{{ else }}#88C0D0{{ end }}'
+      '{{ if .Segments.Contains "Git" }}#88C0D0{{ else }}#81A1C1{{ end }}'
     ]
 
     [blocks.segments.properties]
