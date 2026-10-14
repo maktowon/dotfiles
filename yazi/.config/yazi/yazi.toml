@@ -1,0 +1,12 @@
+# yazi config — defaults: https://github.com/sxyazi/yazi/tree/main/yazi-config/preset
+
+[mgr]
+ratio          = [1, 3, 4]   # parent / current / preview column widths
+show_hidden    = true        # same as GLOB_DOTS in zsh
+sort_by        = "natural"   # file2 before file10
+sort_dir_first = true        # like eza --group-directories-first
+linemode       = "size"      # show size next to each entry (toggle with m s / m m / m n)
+scrolloff      = 8
+
+[preview]
+wrap = "yes"                 # wrap long lines in text previews

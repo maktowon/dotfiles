@@ -89,6 +89,19 @@ export FZF_CTRL_T_OPTS="--preview '$_fzf_preview' --bind 'ctrl-/:toggle-preview'
 export FZF_ALT_C_OPTS="--preview 'eza --tree --level=2 -a -I .git --color=always --icons=always --group-directories-first {}'"
 fp() { fzf --preview "$_fzf_preview" "$@" }  # fuzzy file picker with preview
 
+# yazi (file manager), config in ~/.config/yazi
+# y: open yazi; quit with Q to cd the shell to wherever you ended up (q stays put)
+y() {
+  local tmp="$(mktemp -t yazi-cwd.XXXXXX)" cwd
+  YAZI_START="$PWD" command yazi "$@" --cwd-file="$tmp"  # YAZI_START is used by g w in yazi
+  IFS= read -r -d '' cwd < "$tmp"
+  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+  rm -f -- "$tmp"
+}
+alias yazi='y'                          # plain yazi also gets Q cd-on-quit and g w
+bindkey -s '^o' '^uy\n'                 # ctrl-o: open yazi from the prompt
+
 # editor
-EDITOR='nvim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 
