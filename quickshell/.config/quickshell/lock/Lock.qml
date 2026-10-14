@@ -22,6 +22,18 @@ Scope {
         }
     }
 
+    // Auto-lock after 15 minutes without input (respects idle inhibitors, e.g. video playback)
+    IdleMonitor {
+        timeout: 15 * 60
+
+        onIsIdleChanged: {
+            if (isIdle && !sessionLock.locked) {
+                root.errorText = "";
+                sessionLock.locked = true;
+            }
+        }
+    }
+
     PamContext {
         id: pam
 
