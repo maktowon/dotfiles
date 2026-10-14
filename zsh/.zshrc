@@ -58,8 +58,19 @@ bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 
 # aliases
-alias ls='ls --color'
 alias v='nvim'
+
+# eza (ls replacement)
+alias ls='eza --icons=auto --group-directories-first --hyperlink'
+alias la='ls -a'
+alias ll='ls -l --git --no-user --header --time-style=long-iso'
+alias lla='ll -a'
+alias lt='ls --tree --git-ignore'
+alias lta='lt -a -I .git'
+alias lss='ll -s size --total-size'     # sort by size, dirs show full size
+alias lsm='ll -s modified -r'           # newest first
+alias lg='ll -a --git-repos'            # show git status of subfolders that are repos
+alias lf='ls -D'                        # directories only
 
 # editor
 EDITOR='nvim'
