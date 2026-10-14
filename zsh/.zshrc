@@ -69,7 +69,7 @@ alias lt='ls --tree --git-ignore'
 alias lta='lt -a -I .git'
 alias lss='ll -s size --total-size'     # sort by size, dirs show full size
 alias lsm='ll -s modified -r'           # newest first
-alias lg='ll -a --git-repos'            # show git status of subfolders that are repos
+alias lgr='ll -a --git-repos'           # show git status of subfolders that are repos
 alias lf='ls -D'                        # directories only
 
 # bat (cat replacement), config in ~/.config/bat/config
@@ -100,6 +100,17 @@ y() {
 }
 alias yazi='y'                          # plain yazi also gets Q cd-on-quit and g w
 bindkey -s '^o' '^uy\n'                 # ctrl-o: open yazi from the prompt
+
+# lazygit, config in ~/.config/lazygit
+# lg: quit with q to cd the shell into the repo you ended up in (Q stays put)
+function lg {
+  local tmp="$(mktemp -t lazygit-cwd.XXXXXX)" cwd
+  LAZYGIT_NEW_DIR_FILE="$tmp" command lazygit "$@"
+  [ -s "$tmp" ] && cwd="$(<"$tmp")"
+  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+  rm -f -- "$tmp"
+}
+bindkey -s '^g' '^ulg\n'                # ctrl-g: open lazygit from the prompt
 
 # editor
 export EDITOR='nvim'

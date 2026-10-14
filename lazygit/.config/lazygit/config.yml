@@ -1,0 +1,46 @@
+# lazygit config — defaults: `lazygit --config`, docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+# launch with `lg` (zsh): quit with q to cd the shell into the repo you ended up in, Q to stay put
+
+gui:
+  nerdFontsVersion: "3"       # file and branch icons
+  border: rounded
+  showRandomTip: false
+  showBottomLine: false       # hide the keybinding hint line, ? shows them anyway
+  showNumstatInFilesView: true # +/- line counts next to changed files
+  showDivergenceFromBaseBranch: arrowAndNumber # how far a branch is ahead/behind main
+  timeFormat: "2006-01-02"
+  shortTimeFormat: "15:04"
+  scrollHeight: 4
+  # Nord palette, matching kitty, ghostty, nvim and bat
+  theme:
+    activeBorderColor: ["#88C0D0", bold]          # nord8 frost
+    inactiveBorderColor: ["#4C566A"]              # nord3
+    searchingActiveBorderColor: ["#EBCB8B", bold] # nord13 yellow
+    optionsTextColor: ["#81A1C1"]                 # nord9
+    selectedLineBgColor: ["#3B4252"]              # nord1
+    inactiveViewSelectedLineBgColor: ["#3B4252"]
+    cherryPickedCommitFgColor: ["#2E3440"]
+    cherryPickedCommitBgColor: ["#8FBCBB"]        # nord7
+    markedBaseCommitFgColor: ["#2E3440"]
+    markedBaseCommitBgColor: ["#EBCB8B"]
+    unstagedChangesColor: ["#BF616A"]             # nord11 red
+    defaultFgColor: ["#D8DEE9"]                   # nord4
+
+git:
+  commit:
+    autoWrapCommitMessage: true
+  parseEmoji: true
+  # compact one-line graph log
+  branchLogCmd: git log --graph --color=always --pretty=format:'%C(yellow)%h%C(reset) %s%C(auto)%d%C(reset) %C(blue)%an%C(reset) %C(dim)%ar%C(reset)' {{branchName}} --
+  allBranchesLogCmds:
+    - git log --graph --all --color=always --pretty=format:'%C(yellow)%h%C(reset) %s%C(auto)%d%C(reset) %C(blue)%an%C(reset) %C(dim)%ar%C(reset)'
+
+os:
+  editPreset: nvim            # e opens the file in nvim at the selected line
+
+update:
+  method: never               # installed with pacman
+
+disableStartupPopups: true
+promptToReturnFromSubprocess: false
+notARepository: skip          # outside a repo, open the last repo instead of asking
