@@ -1,0 +1,21 @@
+# bat config — see `bat --help` / `man bat`
+
+# match the Nord theme used in kitty, ghostty and nvim
+--theme="Nord"
+
+# line numbers, git change markers, file header with size, grid lines
+--style="numbers,changes,header,header-filesize,grid"
+
+--italic-text=always
+
+# collapse runs of blank lines into one
+--squeeze-blank
+
+# when the pager is less: quit if it fits on one screen, keep colors, mouse scroll
+--pager="less -RF --mouse"
+
+# syntax mappings for configs bat doesn't detect on its own
+--map-syntax="**/hypr/**/*.conf:INI"
+--map-syntax="*.ghostty:INI"
+--map-syntax="**/kitty/*.conf:INI"
+--map-syntax=".ignore:Git Ignore"

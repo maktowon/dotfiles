@@ -72,6 +72,23 @@ alias lsm='ll -s modified -r'           # newest first
 alias lg='ll -a --git-repos'            # show git status of subfolders that are repos
 alias lf='ls -D'                        # directories only
 
+# bat (cat replacement), config in ~/.config/bat/config
+alias cat='bat --paging=never'          # highlighted cat, no pager
+alias catc='bat --plain --paging=never' # no decorations, safe to copy from
+alias catp='bat'                        # bat with pager
+alias -g -- --help='--help 2>&1 | bat --plain --language=help'  # colored --help everywhere
+export MANPAGER="sh -c 'col -bx | bat --language=man --plain'"  # colored man pages
+export MANROFFOPT='-c'
+
+# scroll the preview by half a page (vim-style)
+export FZF_DEFAULT_OPTS="--bind 'ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up'"
+
+# fzf previews: tree for directories, bat for files (ctrl-t, alt-c, fp)
+_fzf_preview='if [ -d {} ]; then eza --tree -a -I .git --color=always --icons=always --group-directories-first {}; else bat --color=always --style=numbers --line-range=:300 {}; fi'
+export FZF_CTRL_T_OPTS="--preview '$_fzf_preview' --bind 'ctrl-/:toggle-preview'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --level=2 -a -I .git --color=always --icons=always --group-directories-first {}'"
+fp() { fzf --preview "$_fzf_preview" "$@" }  # fuzzy file picker with preview
+
 # editor
 EDITOR='nvim'
 
