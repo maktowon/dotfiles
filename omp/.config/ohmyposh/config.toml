@@ -10,7 +10,7 @@ final_space = true
   type = 'prompt'
   alignment = 'left'
   newline = true
-  leading_diamond = ''
+  leading_diamond = ' '
   trailing_diamond = ''
 
   # USER
@@ -75,7 +75,7 @@ final_space = true
     type = 'status'
     style = 'plain'
     foreground = '#A3BE8C'
-    template = '{{ if .Executed }}{{ if eq .Code 0 }}✓{{ else }}✗{{ end }}{{ end }}'
+    template = '{{ if .Executed }}{{ if eq .Code 0 }}✓{{ else }}✗{{ end }}{{ end }} '
 
     foreground_templates = [
       '{{ if gt .Code 0 }}#BF616A{{ end }}'
@@ -89,20 +89,10 @@ final_space = true
     type = 'executiontime'
     style = 'plain'
     foreground = '#D8DEE9'
-    template = ' {{ .FormattedMs }} '
+    template = '{{ .FormattedMs }} '
 
     [blocks.segments.properties]
       threshold = 500
-
-  # CURRENT TIME
-  [[blocks.segments]]
-    type = 'time'
-    style = 'plain'
-    foreground = '#D8DEE9'
-    template = ' {{ .CurrentDate | date .Format }}'
-
-    [blocks.segments.properties]
-      time_format = '15:04:05'
 
   # PYTHON
   [[blocks.segments]]
@@ -210,6 +200,15 @@ final_space = true
     [blocks.segments.properties]
       display_mode = 'context'
 
+  # CURRENT TIME
+  [[blocks.segments]]
+    type = 'time'
+    style = 'plain'
+    foreground = '#D8DEE9'
+    template = '{{ .CurrentDate | date .Format }}'
+
+    [blocks.segments.properties]
+      time_format = '15:04:05 '
 
 # ============================================================
 # TRANSIENT PROMPT
@@ -217,5 +216,5 @@ final_space = true
 
 [transient_prompt]
   foreground = '#D8DEE9'
-  template = '❯ '
-  right_template = '{{ now | date "15:04:05" }}'
+  template = ' ❯ '
+  right_template = '{{ now | date "15:04:05" }} '
