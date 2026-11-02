@@ -2,7 +2,7 @@ import Quickshell
 import QtQuick
 import qs
 
-// Full-screen login UI shared by the lock screen and the greetd greeter.
+// Full-screen login UI used by the lock screen.
 // It only collects input; the owner does the actual authentication.
 Item {
     id: root
