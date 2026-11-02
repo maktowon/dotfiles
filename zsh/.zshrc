@@ -80,6 +80,18 @@ alias -g -- --help='--help 2>&1 | bat --plain --language=help'  # colored --help
 export MANPAGER="sh -c 'col -bx | bat --language=man --plain'"  # colored man pages
 export MANROFFOPT='-c'
 
+# git
+alias gs='git status --short'
+alias gd="git diff --output-indicator-new=' ' --output-indicator-old=' '"
+alias gap='git add --patch'
+alias gc='git commit'
+alias gp='git push'
+alias gu='git pull'
+alias gl="git log --all --graph --pretty=format:'%C(magenta)%h %C(white) %an  %ar%C(auto)  %D%n%s%n'"
+alias gb='git branch'
+alias gi='git init'
+alias gcl='git clone'
+
 # scroll the preview by half a page (vim-style)
 export FZF_DEFAULT_OPTS="--bind 'ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up'"
 

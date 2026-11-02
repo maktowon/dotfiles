@@ -1,0 +1,35 @@
+[user]
+	email = nowotka.maciej@gmail.com
+	name = maktowon
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+	insteadOf = gh:
+[url "git@github.com:maktowon/"]
+	insteadOf = me:
+[status]
+	branch = true
+	showStash = true
+	showUntrackedFiles = all
+[diff]
+	context = 3
+	renames = copies
+	interHunkContext = 10
+[pager]
+	diff = diff-so-fancy | ${PAGER:-less}
+[diff-so-fancy]
+	markEmptyLines = false
+[interactive]
+	diffFilter = diff-so-fancy --patch
+	singleKey = true
+[push]
+	autoSetupRemote = true
+	default = current
+	followTags = true
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+	missingCommitsCheck = warn
+[log]
+	abbrevCommit = true
+	graphColors = blue,yellow,cyan,magenta,green,red
