@@ -12,6 +12,9 @@ hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd("qs ipc call lock lock"))
 -- terminal
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(programs.terminal))
 
+-- file explorer
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(programs.fileManager))
+
 -- app launcher
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(programs.menu))
 
