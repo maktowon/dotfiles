@@ -1,6 +1,6 @@
 -- programs.lua
 
-local terminal     = "kitty"
+local terminal     = "wezterm"
 local fileManager  = "thunar"
 local menu         = "qs ipc call launcher toggle"
 local desktopShell = "qs"

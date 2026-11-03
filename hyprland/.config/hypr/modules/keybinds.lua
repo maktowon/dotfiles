@@ -18,18 +18,47 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(programs.fileManager))
 -- app launcher
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(programs.menu))
 
--- close window
-hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+-- close window; WezTerm gets the key instead and kills the window's session (see wezterm.lua)
+hl.bind(mainMod .. " + Q", function()
+    local w = hl.get_window("activewindow")
+    if w and w.class == "org.wezfurlong.wezterm" then
+        hl.dispatch(hl.dsp.send_shortcut({ mods = mainMod, key = "q", window = "activewindow" }))
+    else
+        hl.dispatch(hl.dsp.window.close())
+    end
+end)
 
 -- fullscreen
 hl.bind(mainMod .. " + F",  hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(mainMod .. " + SHIFT + F",  hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 
--- move focus
-hl.bind(mainMod .. " + H",  hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + L",  hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + K",  hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
+-- move focus; in WezTerm, pass the key through while it has a pane in that direction
+-- (WezTerm moves between panes on Alt+h/j/k/l, see wezterm.lua)
+local function wezterm_has_pane(pid, direction)
+    local f = io.popen(("WEZTERM_UNIX_SOCKET=$XDG_RUNTIME_DIR/wezterm/gui-sock-%d wezterm cli --no-auto-start get-pane-direction %s 2>/dev/null"):format(pid, direction))
+    local out = f:read("*a")
+    f:close()
+    return out:match("%d") ~= nil
+end
+
+-- a passed key press makes Hyprland call the bind again on release; pass that too
+local passing = false
+
+local function focus(direction)
+    return function()
+        local w = hl.get_window("activewindow")
+        if passing or (w and w.class == "org.wezfurlong.wezterm" and wezterm_has_pane(w.pid, direction)) then
+            passing = not passing
+            hl.dispatch(hl.dsp.pass({ window = "activewindow" }))
+        else
+            hl.dispatch(hl.dsp.focus({ direction = direction }))
+        end
+    end
+end
+hl.bind(mainMod .. " + H",  focus("left"))
+hl.bind(mainMod .. " + L",  focus("right"))
+hl.bind(mainMod .. " + K",  focus("up"))
+hl.bind(mainMod .. " + J",  focus("down"))
 
 -- swap windows
 hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.swap({ direction = "left" }))
