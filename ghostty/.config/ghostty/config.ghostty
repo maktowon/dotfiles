@@ -10,3 +10,31 @@ cursor-style-blink = false
 # shell-integration-features = no-cursor
 
 # app-notifications = no-clipboard-copy,no-config-reload
+
+# --- my setup (mirrors the wezterm config where ghostty supports it fully) ---
+
+# fade splits that don't have focus (lower = dimmer)
+unfocused-split-opacity = 0.6
+
+# leader is ctrl+a, then the key
+# send a literal ctrl+a
+keybind = ctrl+a>ctrl+a=text:\x01
+# vim semantics: h = :split (stacked), v = :vsplit (side by side)
+keybind = ctrl+a>h=new_split:down
+keybind = ctrl+a>v=new_split:right
+# maximize/restore current split
+keybind = ctrl+a>f=toggle_split_zoom
+# close current split (asks only if a process is running)
+keybind = ctrl+a>q=close_surface
+
+# split navigation
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:down
+keybind = ctrl+k=goto_split:up
+keybind = ctrl+l=goto_split:right
+
+# split resizing
+keybind = ctrl+shift+h=resize_split:left,30
+keybind = ctrl+shift+j=resize_split:down,30
+keybind = ctrl+shift+k=resize_split:up,30
+keybind = ctrl+shift+l=resize_split:right,30
