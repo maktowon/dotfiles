@@ -2,7 +2,7 @@
 	email = nowotka.maciej@gmail.com
 	name = maktowon
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+	pushInsteadOf = https://github.com/
 	insteadOf = gh:
 [url "git@github.com:maktowon/"]
 	insteadOf = me:

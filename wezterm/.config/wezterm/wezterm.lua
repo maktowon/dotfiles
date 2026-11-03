@@ -25,9 +25,35 @@ config.inactive_pane_hsb = { saturation = 0.85, brightness = 1.0 }
 
 -- keep sessions alive in a background mux server; closing the window just detaches
 config.unix_domains = { { name = 'unix' } }
-config.default_gui_startup_args = { 'connect', 'unix' }
 -- closing only detaches, so there's nothing to confirm
 config.window_close_confirmation = 'NeverPrompt'
+
+-- ssh: remote servers as domains (uncomment and add a matching Host in ~/.ssh/config)
+-- connect with `leader c`, or from a shell: `wezterm connect example_server`
+-- config.ssh_domains = {
+--   {
+--     name = 'example_server',
+--     -- Host alias from ~/.ssh/config (user, port and key come from there)
+--     remote_address = 'example_server',
+--     -- 'WezTerm': persistent sessions that survive disconnects; needs the same
+--     --            wezterm version installed on the server
+--     -- 'None':    plain ssh, nothing to install; splits still open on the server
+--     multiplexing = 'WezTerm',
+--     -- lets new splits open in the same remote directory
+--     assume_shell = 'Posix',
+--   },
+-- }
+-- or instead of listing servers by hand, make a domain for every Host in ~/.ssh/config:
+-- config.ssh_domains = wezterm.default_ssh_domains()
+
+-- every launch starts in a fresh session with a random 4-letter name; old ones stay
+-- reachable with leader s, rename with leader r
+local function random_name()
+  local name = ''
+  for _ = 1, 4 do name = name .. string.char(math.random(97, 122)) end
+  return name
+end
+config.default_gui_startup_args = { 'connect', '--workspace', random_name(), 'unix' }
 
 -- save every workspace to disk every 5 minutes
 if resurrect then
@@ -109,6 +135,14 @@ local function project_choices()
   return choices
 end
 
+-- session menu (sessions.sh, fzf): o = open, d = delete without closing the menu.
+-- it asks for a switch by setting the switch_workspace user var
+wezterm.on('user-var-changed', function(window, pane, name, value)
+  if name == 'switch_workspace' then
+    window:perform_action(act.SwitchToWorkspace { name = value }, pane)
+  end
+end)
+
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 3000 }
 
 config.keys = {
@@ -156,7 +190,7 @@ config.keys = {
   { key = 'Space', mods = 'LEADER', action = act.QuickSelect },
 
   -- sessions (workspaces)
-  { key = 's', mods = 'LEADER', action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
+  { key = 's', mods = 'LEADER', action = act.SpawnCommandInNewTab { args = { wezterm.config_dir .. '/sessions.sh' } } },
   {
     key = 'n',
     mods = 'LEADER',
@@ -202,6 +236,9 @@ config.keys = {
       }, pane)
     end),
   },
+
+  -- connect to a server from ssh_domains (fuzzy list)
+  -- { key = 'c', mods = 'LEADER', action = act.ShowLauncherArgs { flags = 'FUZZY|DOMAINS' } },
 }
 
 -- save the current session to disk now / restore a saved one (e.g. after a reboot)
