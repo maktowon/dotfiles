@@ -61,7 +61,7 @@ bindkey '^n' history-search-forward
 alias v='nvim'
 
 # eza (ls replacement)
-alias ls='eza --icons=auto --group-directories-first --hyperlink'
+alias ls='eza --icons=auto --group-directories-first --hyperlink=auto'
 alias la='ls -a'
 alias ll='ls -l --git --no-user --header --time-style=long-iso'
 alias lla='ll -a'
