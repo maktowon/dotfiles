@@ -9,7 +9,7 @@ Each top-level folder is a [GNU Stow](https://www.gnu.org/software/stow/) packag
 ```sh
 git clone git@github.com:maktowon/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-stow hyprland quickshell wezterm zsh omp nvim git   # or any subset
+stow hyprland gtk quickshell wezterm zsh omp nvim git   # or any subset
 ```
 
 `getty` is the exception. It's a system file, not a home one, so it has its own installer (see below).
@@ -20,6 +20,7 @@ stow hyprland quickshell wezterm zsh omp nvim git   # or any subset
 |---|---|
 | `hyprland` | Hyprland compositor, Lua config split into `modules/` (input, keybinds, monitors, look, …) |
 | `quickshell` | Bar, launcher and lock screen |
+| `gtk` | Nord GTK theme for Thunar and other GTK apps: [Nordic](https://github.com/EliverLara/Nordic) (GPL-3.0) at `be5bda3`, GTK 3/4 files only. Selected by `hyprland` at startup |
 | `wezterm` | Main terminal: sessions, splits, centered status bar, session menu (`sessions.sh`) |
 | `kitty`, `ghostty` | Alternative terminals with the same splits and keys, where they support them |
 | `zsh` | `.zshrc` (zinit plugins, fzf) and `.zprofile` (starts Hyprland on tty1) |
